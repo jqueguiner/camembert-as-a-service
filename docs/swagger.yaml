@@ -1,0 +1,71 @@
+openapi: 3.0.1
+info:
+  description: This API will return an segmented image
+  version: 1.0.0
+  title: Image Segmentation
+  termsOfService: 'https://market-place.ai.ovh.net/#!/cgu-en'
+  contact:
+    name: API Support
+    url: 'https://gitter.im/ovh/ai'
+  license:
+    name: MIT
+    url: 'https://github.com/jqueguiner/image-segmentation/blob/master/LICENSE'
+host: api-market-place.ai.ovh.net
+basePath: /
+tags:
+  - name: Image Segmentation
+    description: Everything you need to segment your image
+    externalDocs:
+      description: Find out more
+      url: 'https://bit.ly/'
+  - name: process
+    description: Segment your image
+paths:
+  /process:
+    post:
+      security:
+        - apikey: []
+      tags:
+        - process
+      summary: Segment your image
+      description: Process image
+      operationId: process
+      responses:
+        '200':
+          description: OK
+          content:
+            image/jpg:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: input error
+        '401':
+          description: Unauthorized
+      requestBody:
+        description: Segment your image
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Process'
+components:
+  securitySchemes:
+    apikey:
+      type: apiKey
+      name: X-OVH-Api-Key
+      in: header
+  schemas:
+    Process:
+      type: object
+      required:
+        - url
+        - model
+      properties:
+        url:
+          type: string
+          example: 'https://i.ibb.co/6X88r2n/input.jpg'
+        model:
+          type: string
+          example: 'scene_parsing'
+          enum: ['scene_parsing', 'cityscapes', 'visual_object']
