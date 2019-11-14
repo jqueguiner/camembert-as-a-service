@@ -7,3 +7,5 @@ keras-segmentation
 pyunpack
 tensorflow
 tqdm
+regex
+sentencepiece

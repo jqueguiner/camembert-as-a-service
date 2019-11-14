@@ -1,18 +1,14 @@
-FROM guignol95/ai_apis
+FROM pytorch/pytorch:latest
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-  python-opencv \
-  python-matplotlib \
-  python-pillow 
-
+RUN apt-get update && apt-get install -y --no-install-recommends
 
 ADD src /src
 
 WORKDIR /src
 
-RUN pip3 install --upgrade pip
+RUN pip install --upgrade pip
 
-RUN pip3 install -r requirements.txt
+RUN pip install -r requirements.txt
 
 EXPOSE 5000
 
