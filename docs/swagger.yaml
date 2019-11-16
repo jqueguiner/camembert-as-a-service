@@ -1,25 +1,23 @@
 openapi: 3.0.1
 info:
-  description: This API will return an segmented image
+  description: This API will provide some suggestions over a french masked text using BERT
   version: 1.0.0
-  title: Image Segmentation
+  title: CamemBERT
   termsOfService: 'https://market-place.ai.ovh.net/#!/cgu-en'
   contact:
     name: API Support
     url: 'https://gitter.im/ovh/ai'
   license:
     name: MIT
-    url: 'https://github.com/jqueguiner/image-segmentation/blob/master/LICENSE'
-host: api-market-place.ai.ovh.net
-basePath: /
+    url: 'https://github.com/jqueguiner/camembert-as-a-service/LICENSE'
 tags:
-  - name: Image Segmentation
-    description: Everything you need to segment your image
+  - name: camemBERT
+    description: Text Mask Completion for french text using BERT
     externalDocs:
       description: Find out more
-      url: 'https://bit.ly/'
+      url: 'https://bit.ly/2MEIDoe'
   - name: process
-    description: Segment your image
+    description: Fill your french text mask with suggestions
 paths:
   /process:
     post:
@@ -27,8 +25,8 @@ paths:
         - apikey: []
       tags:
         - process
-      summary: Segment your image
-      description: Process image
+      summary: Fill your text mask
+      description: Fill your french text mask with suggestions
       operationId: process
       responses:
         '200':
@@ -39,16 +37,18 @@ paths:
                 type: string
                 format: binary
         '400':
-          description: input error
+          description: 'input error, the text might contain more than 1 mask'
         '401':
           description: Unauthorized
+        '500':
+          description: make sure your API request is written correctly espacially with the appropriate double quote escape
       requestBody:
-        description: Segment your image
+        description: Fill your french text mask with suggestions
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Process'
+              $ref: '#/components/schemas/Body'
 components:
   securitySchemes:
     apikey:
@@ -56,16 +56,17 @@ components:
       name: X-OVH-Api-Key
       in: header
   schemas:
-    Process:
+    Body:
       type: object
       required:
-        - url
-        - model
+        - text
+        - top_k
       properties:
-        url:
+        text:
           type: string
-          example: 'https://i.ibb.co/6X88r2n/input.jpg'
-        model:
-          type: string
-          example: 'scene_parsing'
-          enum: ['scene_parsing', 'cityscapes', 'visual_object']
+          description: French masked text to complete
+          example: 'Le camembert est <mask> :)'
+        top_k:
+          type: integer
+          description: top k most relevant suggestions to complet the mask
+          example: 5

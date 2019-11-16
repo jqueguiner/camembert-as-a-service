@@ -1,2 +1,2 @@
-The project is under GNU General Public License v3.0:
-[https://github.com/divamgupta/image-segmentation-keras/blob/master/LICENSE.txt](https://github.com/divamgupta/image-segmentation-keras/blob/master/LICENSE.txt)
+The project is under MIT License:
+[https://raw.githubusercontent.com/jqueguiner/camembert-as-a-service/master/LICENSE](https://raw.githubusercontent.com/jqueguiner/camembert-as-a-service/master/LICENSE)
