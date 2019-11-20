@@ -1,4 +1,4 @@
 This API use the following Github project : 
-[https://raw.githubusercontent.com/jqueguiner/camembert-as-a-service](https://raw.githubusercontent.com/jqueguiner/camembert-as-a-service/master/LICENSE)
+[https://github.com/jqueguiner/camembert-as-a-service/](https://github.com/jqueguiner/camembert-as-a-service/)
 inspired by :
 [https://camembert-model.fr](https://camembert-model.fr)
